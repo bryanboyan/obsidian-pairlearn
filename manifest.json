@@ -1,0 +1,9 @@
+{
+	"id": "pairlearn",
+	"name": "PairLearn",
+	"version": "1.0.0",
+	"minAppVersion": "1.0.0",
+	"description": "AI-copiloted learning system — build curriculums, track progress, and continue sessions with any LLM.",
+	"author": "Boyan Lin",
+	"isDesktopOnly": false
+}

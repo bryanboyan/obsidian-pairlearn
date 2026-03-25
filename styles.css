@@ -1,0 +1,615 @@
+/* ──────────────────────────────────────
+   Learning Plugin — Styles
+   Uses Obsidian CSS variables for theming
+   ────────────────────────────────────── */
+
+.learning-root {
+	padding: 16px 20px;
+	max-width: 800px;
+	margin: 0 auto;
+	font-family: var(--font-text);
+}
+
+/* ── Header ── */
+
+.learning-header {
+	margin-bottom: 20px;
+}
+
+.learning-header-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 12px;
+}
+
+.learning-title {
+	margin: 0;
+	font-size: 1.5em;
+	font-weight: 700;
+	color: var(--text-normal);
+}
+
+.learning-header-actions {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.learning-header-right {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	flex: 1;
+}
+
+/* ── Buttons ── */
+
+.learning-btn-primary {
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border: none;
+	border-radius: 6px;
+	padding: 6px 16px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: opacity 0.15s;
+}
+
+.learning-btn-primary:hover {
+	opacity: 0.9;
+}
+
+.learning-btn-secondary {
+	background: var(--background-modifier-hover);
+	color: var(--text-normal);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 6px;
+	padding: 6px 16px;
+	font-size: 0.875rem;
+	font-weight: 500;
+	cursor: pointer;
+	transition: background 0.15s;
+}
+
+.learning-btn-secondary:hover {
+	background: var(--background-modifier-border);
+}
+
+.learning-btn-ghost {
+	background: transparent;
+	color: var(--text-muted);
+	border: none;
+	border-radius: 6px;
+	padding: 6px 12px;
+	font-size: 0.875rem;
+	cursor: pointer;
+	transition: color 0.15s, background 0.15s;
+	display: inline-flex;
+	align-items: center;
+	gap: 4px;
+}
+
+.learning-btn-ghost:hover {
+	color: var(--text-normal);
+	background: var(--background-modifier-hover);
+}
+
+.learning-btn-icon {
+	background: transparent;
+	border: none;
+	color: var(--text-muted);
+	cursor: pointer;
+	padding: 6px;
+	border-radius: 4px;
+	display: flex;
+	align-items: center;
+	transition: color 0.15s, background 0.15s;
+}
+
+.learning-btn-icon:hover {
+	color: var(--text-normal);
+	background: var(--background-modifier-hover);
+}
+
+.learning-btn-sm {
+	padding: 2px 8px;
+	font-size: 0.75rem;
+}
+
+.learning-btn-danger {
+	color: var(--text-error);
+}
+
+.learning-btn-danger:hover {
+	color: var(--text-error);
+	background: rgba(var(--color-red-rgb), 0.1);
+}
+
+/* ── Filter Bar ── */
+
+.learning-filter-bar {
+	display: flex;
+	gap: 4px;
+	margin-bottom: 16px;
+	padding: 4px;
+	background: var(--background-secondary);
+	border-radius: 8px;
+}
+
+.learning-filter-btn {
+	background: transparent;
+	border: none;
+	color: var(--text-muted);
+	padding: 6px 14px;
+	border-radius: 6px;
+	font-size: 0.8125rem;
+	cursor: pointer;
+	transition: all 0.15s;
+}
+
+.learning-filter-btn:hover {
+	color: var(--text-normal);
+	background: var(--background-modifier-hover);
+}
+
+.learning-filter-btn.is-active {
+	background: var(--background-primary);
+	color: var(--text-normal);
+	font-weight: 600;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+/* ── Topic Cards (Hub) ── */
+
+.learning-grid {
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
+}
+
+.learning-card {
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 10px;
+	padding: 16px 18px;
+	cursor: pointer;
+	transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.learning-card:hover {
+	border-color: var(--interactive-accent);
+	box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.learning-card-top {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 10px;
+}
+
+.learning-card-title {
+	font-weight: 600;
+	font-size: 1rem;
+	color: var(--text-normal);
+}
+
+.learning-card-progress {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 8px;
+}
+
+.learning-card-progress-text {
+	font-size: 0.8125rem;
+	color: var(--text-muted);
+	white-space: nowrap;
+}
+
+.learning-card-meta {
+	margin-bottom: 4px;
+}
+
+.learning-card-meta-text {
+	font-size: 0.75rem;
+	color: var(--text-faint);
+}
+
+.learning-card-next {
+	margin-top: 6px;
+}
+
+.learning-card-next-label {
+	font-size: 0.8125rem;
+	color: var(--text-muted);
+	font-weight: 500;
+}
+
+.learning-card-next-text {
+	font-size: 0.8125rem;
+	color: var(--text-normal);
+}
+
+/* ── Status Indicators ── */
+
+.learning-status-dot {
+	width: 10px;
+	height: 10px;
+	border-radius: 50%;
+	display: inline-block;
+	flex-shrink: 0;
+}
+
+.learning-status-active {
+	background: var(--color-green);
+}
+
+.learning-status-paused {
+	background: var(--color-yellow);
+}
+
+.learning-status-completed {
+	background: var(--color-blue);
+}
+
+.learning-status-archived {
+	background: var(--text-faint);
+}
+
+.learning-status-badge {
+	font-size: 0.75rem;
+	font-weight: 500;
+	padding: 2px 10px;
+	border-radius: 12px;
+	text-transform: capitalize;
+}
+
+.learning-status-badge.learning-status-active {
+	background: rgba(var(--color-green-rgb), 0.15);
+	color: var(--color-green);
+}
+
+.learning-status-badge.learning-status-paused {
+	background: rgba(var(--color-yellow-rgb), 0.15);
+	color: var(--color-yellow);
+}
+
+.learning-status-badge.learning-status-completed {
+	background: rgba(var(--color-blue-rgb), 0.15);
+	color: var(--color-blue);
+}
+
+.learning-status-badge.learning-status-archived {
+	background: var(--background-modifier-hover);
+	color: var(--text-faint);
+}
+
+/* ── Progress Bar ── */
+
+.learning-progress-bar {
+	flex: 1;
+	height: 6px;
+	background: var(--background-modifier-border);
+	border-radius: 3px;
+	overflow: hidden;
+}
+
+.learning-progress-bar-lg {
+	height: 8px;
+	border-radius: 4px;
+}
+
+.learning-progress-fill {
+	height: 100%;
+	background: var(--interactive-accent);
+	border-radius: inherit;
+	transition: width 0.3s ease;
+	min-width: 0;
+}
+
+.learning-progress-label {
+	font-size: 0.8125rem;
+	color: var(--text-muted);
+	margin-top: 6px;
+	display: block;
+}
+
+/* ── Sections (Topic Dashboard) ── */
+
+.learning-section {
+	background: var(--background-secondary);
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 10px;
+	padding: 16px 18px;
+	margin-bottom: 12px;
+}
+
+.learning-section-title {
+	margin: 0 0 12px 0;
+	font-size: 0.9375rem;
+	font-weight: 600;
+	color: var(--text-normal);
+}
+
+/* ── Overview Stats ── */
+
+.learning-overview-grid {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	gap: 12px;
+	margin-bottom: 14px;
+}
+
+.learning-stat {
+	text-align: center;
+}
+
+.learning-stat-value {
+	font-size: 1.125rem;
+	font-weight: 700;
+	color: var(--text-normal);
+}
+
+.learning-stat-label {
+	font-size: 0.75rem;
+	color: var(--text-muted);
+	margin-top: 2px;
+}
+
+.learning-overview-progress {
+	margin-top: 4px;
+}
+
+/* ── Current Position ── */
+
+.learning-current-body {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.learning-current-chapter {
+	font-size: 1.0625rem;
+	font-weight: 600;
+	color: var(--text-normal);
+}
+
+.learning-current-meta {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+}
+
+.learning-current-status {
+	font-size: 0.8125rem;
+	color: var(--text-muted);
+}
+
+.learning-current-next {
+	font-size: 0.875rem;
+	color: var(--text-muted);
+	padding-top: 4px;
+}
+
+.learning-action-row {
+	display: flex;
+	gap: 8px;
+	margin-top: 14px;
+}
+
+/* ── Chapters ── */
+
+.learning-chapter-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.learning-chapter-row {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	padding: 8px 10px;
+	border-radius: 6px;
+	transition: background 0.1s;
+}
+
+.learning-chapter-row:hover {
+	background: var(--background-modifier-hover);
+}
+
+.learning-chapter-completed .learning-chapter-title {
+	color: var(--text-muted);
+}
+
+.learning-chapter-checkbox {
+	flex-shrink: 0;
+	cursor: pointer;
+}
+
+.learning-chapter-info {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+	min-width: 0;
+}
+
+.learning-chapter-title {
+	font-size: 0.875rem;
+	color: var(--text-normal);
+}
+
+.learning-chapter-notes {
+	font-size: 0.75rem;
+	color: var(--text-faint);
+}
+
+.learning-chapter-right {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	flex-shrink: 0;
+}
+
+.learning-chapter-sessions {
+	font-size: 0.75rem;
+	color: var(--text-faint);
+}
+
+/* ── Confidence Stars ── */
+
+.learning-stars {
+	display: inline-flex;
+	gap: 1px;
+}
+
+.learning-star {
+	font-size: 0.9375rem;
+	line-height: 1;
+}
+
+.learning-star-filled {
+	color: var(--color-yellow);
+}
+
+.learning-star-empty {
+	color: var(--text-faint);
+}
+
+.learning-star-interactive {
+	cursor: pointer;
+	transition: transform 0.1s;
+}
+
+.learning-star-interactive:hover {
+	transform: scale(1.2);
+}
+
+/* ── Bullet Lists ── */
+
+.learning-bullet-list {
+	margin: 0;
+	padding-left: 20px;
+}
+
+.learning-bullet-list li {
+	font-size: 0.875rem;
+	color: var(--text-normal);
+	margin-bottom: 4px;
+	line-height: 1.5;
+}
+
+.learning-struggles li {
+	color: var(--text-muted);
+}
+
+/* ── Session Log ── */
+
+.learning-session-list {
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+.learning-session-row {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	padding: 6px 10px;
+	border-radius: 6px;
+	transition: background 0.1s;
+}
+
+.learning-session-row:hover {
+	background: var(--background-modifier-hover);
+}
+
+.learning-session-date {
+	font-size: 0.8125rem;
+	color: var(--text-faint);
+	font-variant-numeric: tabular-nums;
+	flex-shrink: 0;
+	min-width: 80px;
+}
+
+.learning-session-summary {
+	font-size: 0.875rem;
+	color: var(--text-normal);
+	flex: 1;
+	min-width: 0;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* ── Footer Actions ── */
+
+.learning-footer-actions {
+	display: flex;
+	gap: 8px;
+	margin-top: 16px;
+	padding-top: 16px;
+	border-top: 1px solid var(--background-modifier-border);
+}
+
+/* ── Back Button ── */
+
+.learning-back-btn {
+	flex-shrink: 0;
+}
+
+.learning-back-btn svg {
+	vertical-align: middle;
+}
+
+/* ── Empty State ── */
+
+.learning-empty {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding: 60px 20px;
+	text-align: center;
+}
+
+.learning-empty-icon {
+	font-size: 3rem;
+	margin-bottom: 12px;
+}
+
+.learning-empty h3 {
+	margin: 0 0 8px 0;
+	color: var(--text-normal);
+}
+
+.learning-empty p {
+	margin: 0;
+	color: var(--text-muted);
+	font-size: 0.875rem;
+}
+
+.learning-empty-filter {
+	text-align: center;
+	padding: 40px 20px;
+	color: var(--text-muted);
+	font-size: 0.875rem;
+}
+
+/* ── Modal ── */
+
+.learning-modal-description {
+	color: var(--text-muted);
+	font-size: 0.875rem;
+	margin-bottom: 16px;
+}
+
+/* ── Misc ── */
+
+.learning-text-muted {
+	color: var(--text-muted) !important;
+}
