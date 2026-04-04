@@ -1,4 +1,4 @@
-import { ItemView, WorkspaceLeaf, TFile, Notice } from 'obsidian';
+import { ItemView, WorkspaceLeaf, TFile, Notice, setIcon } from 'obsidian';
 import { LearningParser, LEARNING_FOLDER } from './parser';
 import { Topic, Chapter, TopicStatus } from './types';
 import { NewTopicModal, ConfirmModal } from './modals';
@@ -56,10 +56,10 @@ export class LearningView extends ItemView {
 	private renderTimeout: ReturnType<typeof setTimeout> | null = null;
 	private debouncedRender() {
 		if (this.renderTimeout) clearTimeout(this.renderTimeout);
-		this.renderTimeout = setTimeout(() => this.render(), 300);
+		this.renderTimeout = setTimeout(() => { void this.render(); }, 300);
 	}
 
-	async onClose() {
+	onClose() {
 		if (this.renderTimeout) clearTimeout(this.renderTimeout);
 	}
 
@@ -87,10 +87,10 @@ export class LearningView extends ItemView {
 		const actions = titleRow.createDiv({ cls: 'learning-header-actions' });
 
 		const refreshBtn = actions.createEl('button', { cls: 'learning-btn-icon', attr: { 'aria-label': 'Refresh' } });
-		refreshBtn.innerHTML = this.iconSvg('refresh-cw');
-		refreshBtn.onclick = () => this.render();
+		setIcon(refreshBtn, 'refresh-cw');
+		refreshBtn.onclick = () => { void this.render(); };
 
-		const newBtn = actions.createEl('button', { text: '+ New Topic', cls: 'learning-btn-primary' });
+		const newBtn = actions.createEl('button', { text: '+ New topic', cls: 'learning-btn-primary' });
 		newBtn.onclick = () => this.showNewTopicModal();
 
 		// Load topics
@@ -128,7 +128,7 @@ export class LearningView extends ItemView {
 		const empty = parent.createDiv({ cls: 'learning-empty' });
 		empty.createDiv({ cls: 'learning-empty-icon', text: '\uD83C\uDF93' });
 		empty.createEl('h3', { text: 'Start your learning journey' });
-		empty.createEl('p', { text: 'Click "+ New Topic" above, or use /learn in Claude Code.' });
+		empty.createEl('p', { text: 'Click "+ New topic" above, or use /learn in Claude Code.' });
 	}
 
 	private filterTopics(el: HTMLElement, topics: Topic[], status: TopicStatus | 'all') {
@@ -197,7 +197,7 @@ export class LearningView extends ItemView {
 
 		if (!topic) {
 			el.createEl('p', { text: 'Topic not found.' });
-			const back = el.createEl('button', { text: '\u2190 Back', cls: 'learning-btn-ghost' });
+			const back = el.createEl('button', { text: '\u2190 back', cls: 'learning-btn-ghost' });
 			back.onclick = () => this.navigateToHub();
 			return;
 		}
@@ -206,7 +206,7 @@ export class LearningView extends ItemView {
 		const header = el.createDiv({ cls: 'learning-header' });
 		const titleRow = header.createDiv({ cls: 'learning-header-row' });
 		const backBtn = titleRow.createEl('button', { cls: 'learning-btn-ghost learning-back-btn' });
-		backBtn.innerHTML = this.iconSvg('arrow-left');
+		setIcon(backBtn, 'arrow-left');
 		backBtn.createSpan({ text: ' Back' });
 		backBtn.onclick = () => this.navigateToHub();
 
@@ -236,7 +236,7 @@ export class LearningView extends ItemView {
 
 		// Current Position card
 		const currentCard = el.createDiv({ cls: 'learning-section learning-current' });
-		currentCard.createEl('h3', { text: 'Current Position', cls: 'learning-section-title' });
+		currentCard.createEl('h3', { text: 'Current position', cls: 'learning-section-title' });
 		const currentBody = currentCard.createDiv({ cls: 'learning-current-body' });
 
 		if (topic.currentChapterTitle && topic.currentChapterTitle !== 'Not started') {
@@ -262,9 +262,9 @@ export class LearningView extends ItemView {
 
 		// Action buttons
 		const actionRow = currentCard.createDiv({ cls: 'learning-action-row' });
-		const continueBtn = actionRow.createEl('button', { text: 'Open Progress', cls: 'learning-btn-primary' });
+		const continueBtn = actionRow.createEl('button', { text: 'Open progress', cls: 'learning-btn-primary' });
 		continueBtn.onclick = () => this.openFile(`${LEARNING_FOLDER}/${slug}/progress.md`);
-		const planBtn = actionRow.createEl('button', { text: 'Open Plan', cls: 'learning-btn-secondary' });
+		const planBtn = actionRow.createEl('button', { text: 'Open plan', cls: 'learning-btn-secondary' });
 		planBtn.onclick = () => this.openFile(`${LEARNING_FOLDER}/${slug}/plan.md`);
 
 		// Chapters
@@ -281,7 +281,7 @@ export class LearningView extends ItemView {
 		// Key Takeaways
 		if (topic.keyTakeaways.length > 0) {
 			const takeawaysSection = el.createDiv({ cls: 'learning-section' });
-			takeawaysSection.createEl('h3', { text: 'Key Takeaways', cls: 'learning-section-title' });
+			takeawaysSection.createEl('h3', { text: 'Key takeaways', cls: 'learning-section-title' });
 			const list = takeawaysSection.createEl('ul', { cls: 'learning-bullet-list' });
 			for (const item of topic.keyTakeaways) {
 				list.createEl('li', { text: item });
@@ -291,7 +291,7 @@ export class LearningView extends ItemView {
 		// Struggles
 		if (topic.struggles.length > 0) {
 			const strugglesSection = el.createDiv({ cls: 'learning-section' });
-			strugglesSection.createEl('h3', { text: 'Struggles & Questions', cls: 'learning-section-title' });
+			strugglesSection.createEl('h3', { text: 'Struggles & questions', cls: 'learning-section-title' });
 			const list = strugglesSection.createEl('ul', { cls: 'learning-bullet-list learning-struggles' });
 			for (const item of topic.struggles) {
 				list.createEl('li', { text: item });
@@ -301,7 +301,7 @@ export class LearningView extends ItemView {
 		// Session Log
 		if (topic.sessionLog.length > 0) {
 			const sessionsSection = el.createDiv({ cls: 'learning-section' });
-			sessionsSection.createEl('h3', { text: 'Recent Lessons', cls: 'learning-section-title' });
+			sessionsSection.createEl('h3', { text: 'Recent lessons', cls: 'learning-section-title' });
 			const sessionList = sessionsSection.createDiv({ cls: 'learning-session-list' });
 
 			for (const entry of topic.sessionLog.slice().reverse()) {
@@ -326,23 +326,23 @@ export class LearningView extends ItemView {
 		// Footer actions
 		const footer = el.createDiv({ cls: 'learning-footer-actions' });
 		if (topic.status === 'active') {
-			const pauseBtn = footer.createEl('button', { text: 'Pause Topic', cls: 'learning-btn-ghost' });
+			const pauseBtn = footer.createEl('button', { text: 'Pause topic', cls: 'learning-btn-ghost' });
 			pauseBtn.onclick = () => this.setTopicStatus(slug, 'paused');
 		}
 		if (topic.status === 'paused') {
-			const resumeBtn = footer.createEl('button', { text: 'Resume Topic', cls: 'learning-btn-secondary' });
+			const resumeBtn = footer.createEl('button', { text: 'Resume topic', cls: 'learning-btn-secondary' });
 			resumeBtn.onclick = () => this.setTopicStatus(slug, 'active');
 		}
 		if (topic.status !== 'archived') {
 			const archiveBtn = footer.createEl('button', { text: 'Archive', cls: 'learning-btn-ghost learning-btn-danger' });
 			archiveBtn.onclick = () => {
 				new ConfirmModal(this.app, `Archive "${topic.name}"? You can restore it later.`, () => {
-					this.setTopicStatus(slug, 'archived');
+					void this.setTopicStatus(slug, 'archived');
 				}).open();
 			};
 		}
 		if (topic.status === 'archived') {
-			const restoreBtn = footer.createEl('button', { text: 'Restore Topic', cls: 'learning-btn-secondary' });
+			const restoreBtn = footer.createEl('button', { text: 'Restore topic', cls: 'learning-btn-secondary' });
 			restoreBtn.onclick = () => this.setTopicStatus(slug, 'active');
 		}
 	}
@@ -415,23 +415,22 @@ export class LearningView extends ItemView {
 
 	private navigateToHub() {
 		this.state = { mode: 'hub' };
-		this.render();
+		void this.render();
 	}
 
 	private navigateToTopic(slug: string) {
 		this.state = { mode: 'topic', slug };
-		this.render();
+		void this.render();
 	}
 
-	private async showNewTopicModal() {
-		new NewTopicModal(this.app, async (name) => {
-			try {
-				const slug = await this.parser.createTopic(name);
+	private showNewTopicModal() {
+		new NewTopicModal(this.app, (name) => {
+			void this.parser.createTopic(name).then((slug) => {
 				new Notice(`Created topic: ${name}`);
 				this.navigateToTopic(slug);
-			} catch (err) {
+			}).catch((err) => {
 				new Notice(`Failed to create topic: ${err}`);
-			}
+			});
 		}).open();
 	}
 
@@ -445,17 +444,10 @@ export class LearningView extends ItemView {
 	private openFile(path: string) {
 		const file = this.app.vault.getAbstractFileByPath(path);
 		if (file instanceof TFile) {
-			this.app.workspace.getLeaf(true).openFile(file);
+			void this.app.workspace.getLeaf(true).openFile(file);
 		} else {
 			new Notice(`File not found: ${path}`);
 		}
 	}
 
-	private iconSvg(name: string): string {
-		const icons: Record<string, string> = {
-			'refresh-cw': '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>',
-			'arrow-left': '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>',
-		};
-		return icons[name] || '';
-	}
 }

@@ -58,7 +58,7 @@ export class LearningParser {
 		};
 	}
 
-	parseFrontmatter(content: string): Record<string, any> {
+	parseFrontmatter(content: string): Record<string, string | string[]> {
 		const match = content.match(/^---\n([\s\S]*?)\n---/);
 		if (!match) return {};
 		try {
@@ -119,7 +119,7 @@ export class LearningParser {
 			const numMatch = text.match(/^(\d+)/);
 			if (numMatch) {
 				chapterNum = parseInt(numMatch[1]);
-				chapterTitle = text.replace(/^\d+[\.\:\-\—\–\s]*/, '').trim();
+				chapterTitle = text.replace(/^\d+[.:\-—–\s]*/, '').trim();
 			} else {
 				chapterTitle = text;
 			}

@@ -2,17 +2,17 @@ import { Plugin, WorkspaceLeaf } from 'obsidian';
 import { LearningView, VIEW_TYPE_LEARNING } from './learning-view';
 
 export default class LearningPlugin extends Plugin {
-	async onload() {
+	onload() {
 		this.registerView(VIEW_TYPE_LEARNING, (leaf: WorkspaceLeaf) => new LearningView(leaf));
 
-		this.addRibbonIcon('graduation-cap', 'Open PairLearn', () => {
-			this.activateView();
+		this.addRibbonIcon('graduation-cap', 'Open learning view', () => {
+			void this.activateView();
 		});
 
 		this.addCommand({
-			id: 'open-pairlearn',
-			name: 'Open PairLearn',
-			callback: () => this.activateView(),
+			id: 'open-view',
+			name: 'Open learning view',
+			callback: () => { void this.activateView(); },
 		});
 	}
 

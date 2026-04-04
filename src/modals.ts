@@ -13,7 +13,7 @@ export class NewTopicModal extends Modal {
 		const { contentEl } = this;
 		contentEl.addClass('learning-modal');
 
-		contentEl.createEl('h2', { text: 'New Learning Topic' });
+		contentEl.createEl('h2', { text: 'New learning topic' });
 		contentEl.createEl('p', {
 			text: 'What do you want to learn? This creates the topic folder — use /learn in Claude Code or CONTEXT.md with any AI to build the curriculum.',
 			cls: 'learning-modal-description',
@@ -21,7 +21,7 @@ export class NewTopicModal extends Modal {
 
 		new Setting(contentEl)
 			.setName('Topic name')
-			.setDesc('e.g., "Rust & Solana Development", "Transformer Architecture"')
+			.setDesc('e.g., "Rust & Solana development", "Transformer architecture"')
 			.addText(text => {
 				text.setPlaceholder('Enter topic name...');
 				text.onChange(value => { this.topicName = value; });
@@ -37,7 +37,7 @@ export class NewTopicModal extends Modal {
 		new Setting(contentEl)
 			.addButton(btn =>
 				btn
-					.setButtonText('Create Topic')
+					.setButtonText('Create topic')
 					.setCta()
 					.onClick(() => this.submit())
 			);
